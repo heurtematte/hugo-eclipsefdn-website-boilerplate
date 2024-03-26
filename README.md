@@ -2,6 +2,8 @@
 
 This boilerplate was created to help Eclipse Projects migrate their website to Hugo!
 
+We've ensured that this project is compatible with `Hugo 0.110.0`. For information on the specific versions of Hugo we support, you can refer to the [readme.md](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme#getting-started) of our [Hugo Solstice Theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) project.
+
 ## Getting started
 
 Clone the project with submodules and start a web server:
