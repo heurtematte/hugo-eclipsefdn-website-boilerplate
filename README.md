@@ -14,31 +14,32 @@ hugo server
 
 ### Update hugo-solstice-theme
 
-The [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) was added to this project as a git submodule.
+The [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) was added to this project as a git submodule. We recomend that you update to the latest version before getting started:
 
 ```bash
 git submodule update --remote
 ```
 
-For more information, please see git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+Please make sure to keep this sub-module up-to-date if you decide to utilize it. The Eclipse Foundation Webdev team regularly publishes new versions. For more information, please see git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
 ## How to build my project's website with Jenkins?
 
-The preferred static website generator for Eclipse project websites is [Hugo](https://gohugo.io/). 
+The preferred static website generator for Eclipse project websites is [Hugo](https://gohugo.io/) and we recommend to our projects that they get started by creating a copy of our [hugo-eclipsefdn-website-boilerplate](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-eclipsefdn-website-boilerplate) project. While you're not obligated to use them, please note that Hugo and hugo-eclipsefdn-website-boilerplate are the supported solutions by the Eclipse Foundation. Using a different technology may result in reduced support.
 
-You should first put your Hugo sources in a dedicated Git repository, either at GitHub if your source code is already hosted at GitHub or at [gitlab.eclipse.org](https://gitlab.eclipse.org). If you don't have such a repository already, feel free to [open a request](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new), the Eclipse IT team will create one for you.
+In this setup, you'll need two Git repositories. The first one contains your Hugo website's source code, which you can obtain by cloning this repo. The second repository stores your Hugo build results, essentially the static HTML that our web server will end up hosting. Once you've completed the initial setup, managing two repos isn't a concern because the second one will be automatically updated via the `Jenkinsfile`.
 
-Note that each and every Eclipse project automatically gets a Git repository with `git.eclipse.org/www.eclipse.org/<project_name>` (see this [repository index](https://git.eclipse.org/r/plugins/gitiles/www.eclipse.org/) for complete list). This is not where you want to push your Hugo sources. This repository contains the webpages that are automatically and regularly pulled and published on the www.eclipse.org HTTP server. All the content from the master branch will eventually be available at the URL https://www.eclipse.org/<project_name>.
+If you don't already have two git repositories for your website, you can request them to be created by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
 
-We recommend that our projects start with forking our [hugo-eclipsefdn-website-boilerplate](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-eclipsefdn-website-boilerplate) project.
+Before deploying your website, you must update the `Jenkinsfile` at the root of this repository with the correct values for the `PROJECT_NAME` and `PROJECT_BOT_NAME` environment variables. Additionally, it's important to update the `README.md`, `config.toml`, and all files in the `content` folder. Remember, this is just a boilerplate to kickstart your project; you'll still need to create pages and content.
 
-After forking this project for your own use, please go to your project's Settings > General > Advanced > Remove fork relationship and remove the fork relation, this  won't be necessary unless you want to contribute back to this project.
+If you don't have a Jenkins instance already, [ask for one](https://wiki.eclipse.org/CBI#Requesting_a_JIPP_instance).
+Please note that the `Jenkinsfile` file example makes several assumptions. For instance, it assumes that your project will use main as the default branch and that you are using Gerrit to publish your build results. Projects must customize the file to suit their specific requirements and configurations.
 
-Once your Hugo sources are in the proper repository, update the file named `Jenkinsfile` at the root of the repository with the proper value for `PROJECT_NAME` and `PROJECT_BOT_NAME` environment variable. We also expect projects to update the README.md, config.toml and all the files in the content folder.
+If you're new to Hugo, I highly recommend checking out its [documentation](https://gohugo.io/documentation/) to learn how to create pages and customize your site. Although you're starting with [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme), remember that Hugo is highly extensible, allowing you to override as much or as little as you need. For example, you may choose to keep our default footer but override our header. You can make as many changes as you want as long as your website continues to adhere to the [Eclipse Foundation Hosted Services Privacy and Acceptable Usage Policy](https://www.eclipse.org/org/documents/eclipse-foundation-hosted-services-privacy-and-acceptable-usage-policy.pdf).
 
-If you don't have a Jenkins instance already, [ask for one](https://wiki.eclipse.org/CBI#Requesting_a_JIPP_instance). If you need assistance with the process, [open a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new).
+Finally, to publish your website on eclipse.dev, you'll need support from us to update your project's website metadata in the [projects.eclipse.org](https://projects.eclipse.org/) (PMI). This informs us on where to find the necessary static HTML to serve. You can request an update to your website deployment metadata by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
 
-The `Jenkinsfile` example assumes that your project will use `main` as the default branch for your source code. Projects will need to make changes to the file to use a different branch name.
+ If you need assistance with the process, [open a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
 
 ## Contributing
 
@@ -65,7 +66,7 @@ Images, less and JavaScript files for the Eclipse Foundation look and feel.
 
 ### [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme)
 
-Hugo theme of the Eclipse Foundation look and feel. 
+Hugo theme of the Eclipse Foundation look and feel.
 
 ## Bugs and feature requests
 
