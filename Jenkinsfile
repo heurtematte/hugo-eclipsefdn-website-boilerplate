@@ -1,5 +1,5 @@
 pipeline {
- 
+
   agent {
     kubernetes {
       label 'hugo-agent'
@@ -19,7 +19,7 @@ spec:
       - name: "HOME"
         value: "/home/jenkins"
     - name: hugo
-      image: eclipsecbi/hugo:0.81.0
+      image: eclipsecbi/hugo_extended:0.110.0
       command:
       - cat
       tty: true
@@ -30,22 +30,22 @@ spec:
 """
     }
   }
- 
+
   environment {
     PROJECT_NAME = "<project_name>" // must be all lowercase.
     PROJECT_BOT_NAME = "<Project_name> Bot" // Capitalize the name
   }
- 
-  triggers { pollSCM('H/10 * * * *') 
- 
+
+  triggers { pollSCM('H/10 * * * *')
+
  }
- 
+
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
     checkoutToSubdirectory('hugo')
     timeout(time: 60, unit: 'MINUTES')
   }
- 
+
   stages {
     stage('Checkout www repo') {
       steps {
@@ -70,19 +70,7 @@ spec:
       steps {
         container('hugo') {
             dir('hugo') {
-                sh 'hugo -b https://www.eclipse.org/${PROJECT_NAME}/'
-            }
-        }
-      }
-    }
-    stage('Build website (staging) with Hugo') {
-      when {
-        branch 'staging'
-      }
-      steps {
-        container('hugo') {
-            dir('hugo') {
-                sh 'hugo -b https://staging.eclipse.org/${PROJECT_NAME}/'
+                sh 'hugo -b https://eclipse.dev/${PROJECT_NAME}/'
             }
         }
       }
@@ -91,7 +79,6 @@ spec:
       when {
         anyOf {
           branch "main"
-          branch "staging"
         }
       }
       steps {
