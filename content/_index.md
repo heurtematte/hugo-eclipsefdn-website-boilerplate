@@ -20,5 +20,5 @@ Currently the project is maintained by the Eclipse Foundation web development te
 
 {{< starterkit/example >}}
 
-For more information, see our documentation for the [hugo-solstice-theme](https://eclipsefdn-hugo-solstice-theme.netlify.app/).
+For more information, see our documentation for the [hugo-solstice-theme](https://webdev.eclipse.org/docs/hugo/).
 
