@@ -9,3 +9,4 @@
 **/.DS_Store
 /.project
 /data/eclipsefdn_projects.yaml
+.hugo_build.lock
