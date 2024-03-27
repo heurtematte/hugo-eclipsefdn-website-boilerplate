@@ -34,6 +34,8 @@ spec:
   environment {
     PROJECT_NAME = "<project_name>" // must be all lowercase.
     PROJECT_BOT_NAME = "<Project_name> Bot" // Capitalize the name
+    PROJECT_GL_GROUP = "<project_gitlab_group>" // e.g. papyrus
+    PROJECT_WEBSITE_REPO = "<project_website_repo>" // e.g. papyrus-website
   }
 
   triggers { pollSCM('H/10 * * * *')
@@ -50,9 +52,9 @@ spec:
     stage('Checkout www repo') {
       steps {
         dir('www') {
-            sshagent(['git.eclipse.org-bot-ssh']) {
+            sshagent(['gitlab-bot-ssh']) {
                 sh '''
-                    git clone ssh://genie.${PROJECT_NAME}@git.eclipse.org:29418/www.eclipse.org/${PROJECT_NAME}.git .
+                    git clone ssh://git@gitlab.eclipse.org:eclipse/${PROJECT_GL_GROUP}/${PROJECT_WEBSITE_REPO}.git .
                     if [ "${BRANCH_NAME}" = "main" ]; then
                       git checkout master
                     else
@@ -84,11 +86,11 @@ spec:
       steps {
         sh 'rm -rf www/* && cp -Rvf hugo/public/* www/'
         dir('www') {
-            sshagent(['git.eclipse.org-bot-ssh']) {
+            sshagent(['gitlab-bot-ssh']) {
                 sh '''
                 git add -A
                 if ! git diff --cached --exit-code; then
-                  echo "Changes have been detected, publishing to repo 'www.eclipse.org/${PROJECT_NAME}'"
+                  echo "Changes have been detected, publishing to repo 'eclipse/${PROJECT_GL_GROUP}/${PROJECT_WEBSITE_REPO}'"
                   git config user.email "${PROJECT_NAME}-bot@eclipse.org"
                   git config user.name "${PROJECT_BOT_NAME}"
                   git commit -m "Website build ${JOB_NAME}-${BUILD_NUMBER}"
