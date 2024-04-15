@@ -4,6 +4,8 @@ This boilerplate was created to help Eclipse Projects migrate their website to H
 
 We've ensured that this project is compatible with `Hugo 0.110.0`. For information on the specific versions of Hugo we support, you can refer to the [readme.md](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme#getting-started) of our [Hugo Solstice Theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) project.
 
+[[_TOC_]]
+
 ## Getting started
 
 Clone the project with submodules and start a web server:
@@ -24,24 +26,38 @@ git submodule update --remote
 
 Please make sure to keep this sub-module up-to-date if you decide to utilize it. The Eclipse Foundation Webdev team regularly publishes new versions. For more information, please see git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
-## How to build my project's website with Jenkins?
+## Build my project's website
 
 The preferred static website generator for Eclipse project websites is [Hugo](https://gohugo.io/) and we recommend to our projects that they get started by creating a copy of our [hugo-eclipsefdn-website-boilerplate](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-eclipsefdn-website-boilerplate) project. While you're not obligated to use them, please note that Hugo and hugo-eclipsefdn-website-boilerplate are the supported solutions by the Eclipse Foundation. Using a different technology may result in reduced support.
 
-In this setup, you'll need two Git repositories. The first one contains your Hugo website's source code, which you can obtain by cloning this repo. The second repository stores your Hugo build results, essentially the static HTML that our web server will end up hosting. Once you've completed the initial setup, managing two repos isn't a concern because the second one will be automatically updated via the `Jenkinsfile`.
+In this setup, you'll need two Git repositories. The first one contains your Hugo website's source code, which you can obtain by cloning this repo. The second repository stores your Hugo build results, essentially the static HTML that our web server will end up hosting. Once you've completed the initial setup, managing two repos isn't a concern because the second one will be automatically updated via CI.
 
 If you don't already have two git repositories for your website, you can request them to be created by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
+
+### Jenkins integration
 
 Before deploying your website, you must update the `Jenkinsfile` at the root of this repository with the correct values for the `PROJECT_NAME` and `PROJECT_BOT_NAME` environment variables. Additionally, it's important to update the `README.md`, `config.toml`, and all files in the `content` folder. Remember, this is just a boilerplate to kickstart your project; you'll still need to create pages and content.
 
 If you don't have a Jenkins instance already, [ask for one](https://wiki.eclipse.org/CBI#Requesting_a_JIPP_instance).
-Please note that the `Jenkinsfile` file example makes several assumptions. For instance, it assumes that your project will use main as the default branch and that you are using Gerrit to publish your build results. Projects must customize the file to suit their specific requirements and configurations.
+Please note that the `Jenkinsfile` file example makes several assumptions. For instance, it assumes that your project will use main as the default branch. Projects must customize the file to suit their specific requirements and configurations.
+
+### GitLab CI integration
+
+Before deploying your website, ensure to update the `.gitlab-ci.yml` file located at the root of this repository with the accurate `GIT_REMOTE_URL` value in the `push-modification` job. Please provide the Git URL of the target project website that hosts the generated resources from Hugo.
+
+Configure your project to support CI integration. Only GitLab project maintainers have access to this setting. Navigate to `Settings` > `General` > `Visibility, project features, permissions`, and ensure that `CI/CD` is checked. Don't forget to save your changes.
+
+Please be aware that the example `.gitlab-ci.yml` file makes several assumptions. For instance, it assumes that your project will use `main` as the default branch and that `push-modification` only runs with manual action. Customize your configuration according to specific requirements and configurations.
+
+## Learn Hugo
 
 If you're new to Hugo, I highly recommend checking out its [documentation](https://gohugo.io/documentation/) to learn how to create pages and customize your site. Although you're starting with [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme), remember that Hugo is highly extensible, allowing you to override as much or as little as you need. For example, you may choose to keep our default footer but override our header. You can make as many changes as you want as long as your website continues to adhere to the [Eclipse Foundation Hosted Services Privacy and Acceptable Usage Policy](https://www.eclipse.org/org/documents/eclipse-foundation-hosted-services-privacy-and-acceptable-usage-policy.pdf).
 
-Finally, to publish your website on eclipse.dev, you'll need support from us to update your project's website metadata in the [projects.eclipse.org](https://projects.eclipse.org/) (PMI). This informs us on where to find the necessary static HTML to serve. You can request an update to your website deployment metadata by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
+## Update PMI
 
- If you need assistance with the process, [open a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
+Finally, to publish your website on `eclipse.dev`, you'll need support from us to update your project's website metadata in the [projects.eclipse.org](https://projects.eclipse.org/) (PMI). This informs us on where to find the necessary static HTML to serve. You can request an update to your website deployment metadata by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
+
+If you need assistance with the process, [open a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
 
 ## Contributing
 
