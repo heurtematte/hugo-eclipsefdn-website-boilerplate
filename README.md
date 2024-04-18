@@ -18,25 +18,29 @@ hugo server
 
 ### Update hugo-solstice-theme
 
-The [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) was added to this project as a git submodule. We recomend that you update to the latest version before getting started:
+The [hugo-solstice-theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) was added to this project as a Git submodule. We recomend that you update to the latest version before getting started:
 
 ```bash
 git submodule update --remote
 ```
 
-Please make sure to keep this sub-module up-to-date if you decide to utilize it. The Eclipse Foundation Webdev team regularly publishes new versions. For more information, please see git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+Please make sure to keep this sub-module up-to-date if you decide to utilize it. The Eclipse Foundation Webdev team regularly publishes new versions. For more information, please see Git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
 ## Build my project's website
 
 The preferred static website generator for Eclipse project websites is [Hugo](https://gohugo.io/) and we recommend to our projects that they get started by creating a copy of our [hugo-eclipsefdn-website-boilerplate](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-eclipsefdn-website-boilerplate) project. While you're not obligated to use them, please note that Hugo and hugo-eclipsefdn-website-boilerplate are the supported solutions by the Eclipse Foundation. Using a different technology may result in reduced support.
 
-In this setup, you'll need two Git repositories. The first one contains your Hugo website's source code, which you can obtain by cloning this repo. The second repository stores your Hugo build results, essentially the static HTML that our web server will end up hosting. Once you've completed the initial setup, managing two repos isn't a concern because the second one will be automatically updated via CI.
+We recommend two different solutions to create and manage your static project website. The easiest solution is to keep both the source and distribution files together in one repository. The "hugo" command will create all the static files for your website in the "public" folder which you need to commit in your repository. To do so, remove "/public/" from the .gitignore file. This is included by default because projects often prefer to keep their source code and distribution files in separate repositories and utilize CI to ensure their website is always built with the same version of Hugo. We don't recommend the single Git repo solution if more than one individual is responsible for updating the website. This brings us to our next solution.
 
-If you don't already have two git repositories for your website, you can request them to be created by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website).
+In the advanced setup, you'll need two Git repositories. The first one will contain your Hugo website's source code, which you can get started by cloning this repo. The second repository stores your Hugo build results (the static HTML that our web server will end up hosting). Once you've completed the initial setup, managing two repos isn't a concern because the second one will be automatically updated via CI. See the Jenkins integration section below for more information.
+
+When your website is ready for publication or if you need help creating your website Git repositories, please notify us by [opening a ticket](https://gitlab.eclipse.org/eclipsefdn/helpdesk/-/issues/new?issuable_template=project-website). Ensure to share pertinent project information and your Git repositories information with us.
+
+If you don't already have two Git repositories for your website, you can request them to be created by .
 
 ### Jenkins integration
 
-Before deploying your website, you must update the `Jenkinsfile` at the root of this repository with the correct values for the `PROJECT_NAME` and `PROJECT_BOT_NAME` environment variables. Additionally, it's important to update the `README.md`, `config.toml`, and all files in the `content` folder. Remember, this is just a boilerplate to kickstart your project; you'll still need to create pages and content.
+Before deploying your website, you must update the `Jenkinsfile` at the root of this repository with the correct values for the `PROJECT_NAME` and `PROJECT_BOT_NAME` environment variables. Please note that this boilerplate includes two `Jenkinsfile` template depending on whether your repositories are hosted on Eclipse GitLab or GitHub. You'll need to rename either `Jenkinsfile.GitHub` or `Jenkinsfile.GitLab` to `Jenkinsfile` based on where your Git repositories are hosted.  Additionally, it's important to update the `README.md`, `config.toml`, and all files in the `content` folder. Remember, this is just a boilerplate to kickstart your project; you'll still need to create pages and content.
 
 If you don't have a Jenkins instance already, [ask for one](https://wiki.eclipse.org/CBI#Requesting_a_JIPP_instance).
 Please note that the `Jenkinsfile` file example makes several assumptions. For instance, it assumes that your project will use main as the default branch. Projects must customize the file to suit their specific requirements and configurations.
