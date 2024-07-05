@@ -47,11 +47,11 @@ Please note that the `Jenkinsfile` file example makes several assumptions. For i
 
 ### GitLab CI integration
 
-Before deploying your website, ensure to update the `.gitlab-ci.yml` file located at the root of this repository with the accurate `GIT_REMOTE_URL` value in the `push-modification` job. Please provide the Git URL of the target project website that hosts the generated resources from Hugo.
+Before deploying your website, rename `.gitlab-ci.template.yml` to `.gitlab-ci.yml`.
 
 Configure your project to support CI integration. Only GitLab project maintainers have access to this setting. Navigate to `Settings` > `General` > `Visibility, project features, permissions`, and ensure that `CI/CD` is checked. Don't forget to save your changes.
 
-Please be aware that the example `.gitlab-ci.yml` file makes several assumptions. For instance, it assumes that your project will use `main` as the default branch and that `push-modification` only runs with manual action. Customize your configuration according to specific requirements and configurations.
+Please be aware that the example `.gitlab-ci.template.yml` file makes several assumptions. For instance, it assumes that your project source is in the `main` branch, `deploy` is the targeting branch for generated files and that `push-modification` only runs with manual action. Customize your configuration according to specific requirements and configurations.
 
 ## Learn Hugo
 
