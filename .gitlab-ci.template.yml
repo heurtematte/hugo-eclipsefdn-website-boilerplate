@@ -37,8 +37,10 @@ push-modification:
   needs:
     - job: build-hugo
       artifacts: true
-  # variables:
-    # GIT_REMOTE_URL: "<to define git://gitlab.eclipse.org:eclipse/${EF_SHORT_NAME}/website.git>"
+  variables:
+    # GIT_REMOTE_URL: "<to define git://gitlab.eclipse.org:eclipse/${EF_SHORT_NAME}/website.git>" # if the repo is not the same as the source
+    GIT_INIT_DIR: "public" # if the build is not in the root directory
+    GIT_INIT_DEFAULT_BRANCH: "deploy" # publish generated files to the deploy branch
   script:
     - |
       git add -A
