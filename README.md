@@ -2,7 +2,7 @@
 
 This boilerplate was created to help Eclipse Projects migrate their website to Hugo!
 
-We've ensured that this project is compatible with `Hugo 0.110.0`. For information on the specific versions of Hugo we support, you can refer to the [readme.md](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme#getting-started) of our [Hugo Solstice Theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) project.
+We've ensured that this project is compatible with `Hugo 0.144.2`. For information on the specific versions of Hugo we support, you can refer to the [readme.md](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme#getting-started) of our [Hugo Solstice Theme](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme) project.
 
 [[_TOC_]]
 
@@ -25,6 +25,9 @@ git submodule update --remote
 ```
 
 Please make sure to keep this sub-module up-to-date if you decide to utilize it. The Eclipse Foundation Webdev team regularly publishes new versions. For more information, please see Git documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+Reference the Hugo Solstice Theme's [migration guide](https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme/-/wikis/Migration-Guide) 
+to help you deal with breaking changes.
 
 ## Build my project's website
 

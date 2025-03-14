@@ -40,7 +40,7 @@ pluralizeListTitles = false
 [taxonomies]
   tag = "tags"
 
-[Author]
+[Params.author]
   name = "Eclipse Foundation"
   website = "https://www.eclipse.org"
   email = "webdev@eclipse-foundation.org"
